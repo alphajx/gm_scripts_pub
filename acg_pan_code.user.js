@@ -5,7 +5,7 @@
 // @include     http://666dm.net/*
 // @include     http://www.shouyoutan.com/*
 // @include     http://www.yxdm.tv/down.php*
-// @version     1.00
+// @version     1.01
 // @grant       none
 // @downloadURL https://rawgit.com/alphajx/gm_scripts_pub/master/acg_pan_code.user.js
 // @updateURL   https://rawgit.com/alphajx/gm_scripts_pub/master/acg_pan_code.user.js
@@ -52,10 +52,15 @@ function main() {
         }
     }
     if (location.href.indexOf('http://www.yxdm.tv/down.php') != -1) {
+        var yzmDiv = document.getElementsByClassName('yzm');
+        var yzm = '';
+        if (yzmDiv.length == 1) {
+            yzm = yzmDiv[0].innerHTML.slice(-4);
+        }
         var hrefs = document.getElementsByTagName('a');
         for (var i = 0; i < hrefs.length; ++i) {
             if (hrefs[i].href.indexOf('pan.baidu.com/s/') != -1) {
-                location.href = hrefs[i].href;
+                location.href = hrefs[i].href + '#' + yzm;
             }
         }
     }
